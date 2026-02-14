@@ -1,0 +1,36 @@
+name: Deploy ke Cloudflare Pages
+
+on:
+  # 1. Jalan setiap ada update di branch 'main' atau 'master'
+  push:
+    branches:
+      - main 
+  # 2. Jalan otomatis setiap hari jam 00:00 UTC (Opsional)
+  schedule:
+    - cron: '0 0 * * *'
+  # 3. Tombol manual untuk deploy kapan saja
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: Deploy ke Cloudflare Pages
+    steps:
+      - name: Checkout kode
+        uses: actions/checkout@v3
+
+      # Di sini biasanya ada langkah 'Build' jika perlu (misal: npm install & npm run build)
+      # Karena ini fungsi serverless, kita mungkin perlu setup khusus nanti.
+      
+      - name: Publish ke Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: 'nama-proyek-di-cloudflare' # Ganti ini nanti
+          directory: '.' # Folder yang mau di-upload
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          
