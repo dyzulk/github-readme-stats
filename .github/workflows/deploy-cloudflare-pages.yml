@@ -30,7 +30,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 'nama-proyek-di-cloudflare' # Ganti ini nanti
+          projectName: 'github-readme-stats-dyzulk' # Ganti ini nanti
           directory: '.' # Folder yang mau di-upload
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           
